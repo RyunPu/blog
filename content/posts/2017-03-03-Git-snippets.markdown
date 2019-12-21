@@ -100,4 +100,37 @@ Push the changes in your local repository to GitHub
 $ git push -u origin master
 ```
 
+### Delete commit history
+
+Create orphan branch
+
+```bash
+$ git checkout --orphan temp_branch
+```
+
+Add files to branch
+
+```bash
+$ git add -A
+$ git commit -m "First commit"
+```
+
+Delete master branch
+
+```bash
+$ git branch -D master
+```
+
+Rename current branch
+
+```bash
+$ git branch -m master
+```
+
+Push changes
+
+```bash
+$ git push -f origin master
+```
+
 see more: [github help](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/), [GitHub-Forking](https://gist.github.com/Chaser324/ce0505fbed06b947d962)

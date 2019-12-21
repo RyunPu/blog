@@ -35,4 +35,4 @@ layout: about
 
 <br>
 
-see this [hugo-theme-dream-ink](https://github.com/RyunPu/hugo-theme-dream-ink)
+see this <a href="https://github.com/RyunPu/hugo-theme-dream-ink" target="_blank">hugo-theme-dream-ink</a>
