@@ -20,10 +20,10 @@
       </div>
     </div>
 
-    <div class="ui centered relaxed grid dream-grid">
+    <div class="ui sre centered relaxed grid dream-grid">
       {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") 8 }}
       {{ range $paginator.Pages }}
-        <div class="sre sixteen wide mobile eight wide tablet four wide computer column dream-column">
+        <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
           {{ .Render "summary" }}
         </div>
       {{ end }}

@@ -6,16 +6,18 @@ const corsApi = 'https://cors-anywhere.herokuapp.com/'
 let q = 'design'
 
 $(() => {
+  console.log('blog')
   initPalette()
   initCover()
 })
 
 // 为归档、标签和分类添加背景颜色
 function initPalette() {
-  const $palette = $('.dream-palette')
-  if ($palette.length === 0) return
+  if ($('.dream-tags').length === 0) return
 
+  const $palette = $('.dream-palette')
   const localColors = localStorage.getItem('colors')
+
   if (localColors) {
     addBGC(localColors.split(','))
   } else {
@@ -37,6 +39,7 @@ function initPalette() {
             .map(function(index) {
               const title = $(this).attr('title')
               localStorage.setItem(title, colors[index])
+              $(this).css('background', `#${colors[index]}`).attr('class', 'ui label')
             })
         }
       }
@@ -46,7 +49,7 @@ function initPalette() {
 
 function addBGC(colors) {
   const $palette = $('.dream-palette')
-  if (colors[0].length !== 6 || colors.length < $palette.length) return
+  if ($palette.length === 0 || colors[0].length !== 6 || colors.length < $palette.length) return
 
   $palette.find('.card').each((index, ele) => {
     const color = `#${colors[index]}`
@@ -56,7 +59,7 @@ function addBGC(colors) {
 
 // 为文章添加封面图
 function initCover(page) {
-  return false
+  // return false
   if ($('.dream-column').length === 0) return
   const $randomImg = $('.random-img:not(.inited)')
 
@@ -89,18 +92,17 @@ function initCover(page) {
         const hits = res.hits
 
         if (hits.length > 0) {
-          $('.dream-grid').masonry()
+          const $grid = $('.dream-grid')
+          $grid.masonry({ itemSelector: '.dream-column' })
+
           $randomImg.each((index, ele) => {
             const src = hits[index] && hits[index].webformatURL
             if (!src) return
+            $(ele).attr('src', src).addClass('inited')
+          })
 
-            const img = new Image()
-            img.src = src
-            img.onload = () => {
-              $(ele).attr('src', src)
-              $('.dream-grid').masonry('layout')
-            }
-            $(ele).addClass('inited')
+          $grid.imagesLoaded().progress(() => {
+            $grid.masonry('layout')
           })
         }
       }
