@@ -1,0 +1,156 @@
+---
+layout: post
+title:  "新浪股票查询接口"
+date:   2017-02-26
+categories: ['web development']
+tags: ['javascript']
+---
+
+### 关键词查询
+
+```js
+function getSuggestion(str) {
+  var url = 'https://suggest3.sinajs.cn/suggest/';
+
+  $.ajax({
+    url: url,
+    data: {
+      name: 'suggestion',
+      type: 111,
+      key: str
+    },
+    cache: true,
+    async: false,
+    dataType: 'script',
+    success: function() {
+      var list = suggestion.split(';');
+
+      return $.map(list, function(str) {
+        var data = str.split(',');
+        if (!data[4]) return '<tr><td colspan="3">暂无数据</td></tr>';
+
+        // 三项分别是 名称、代码和简拼
+        return '<tr><td>' + data[4] + '</td><td>' + data[2] + '</td><td>' + data[5] + '</td></tr>';
+      });
+    }
+  });
+}
+```
+
+### 股票基本信息查询
+
+```js
+function getCode(code) {
+  var code = code || 'sz000001';
+  var url = 'http://hq.sinajs.cn/list=' + code;
+  var detail = $('.stock-detail');
+
+  $.ajax({
+    url: url,
+    cache: true,
+    async: false,
+    dataType: 'script',
+    success: function() {
+      var direction, percent, new_price;
+      var data = eval('(' + ['hq_str_' + code] + ')').split(',');
+
+      new_price = (+data[3]).toFixed(2);
+
+      // 主要股票信息
+      $('.new', detail).html(new_price);
+      direction = data[3] - data[2];
+      percent = (direction * 100 / data[2]).toFixed(2);
+      $('.top', detail).html(direction.toFixed(2));
+      $('.bottom', detail).html(percent + '%');
+      if (direction > 0) {
+        $('.stock-new', detail).removeClass('green').addClass('red');
+      } else if (direction < 0) {
+        $('.stock-new', detail).removeClass('red').addClass('green');
+      }
+
+      // 买卖股票信息
+      for (var i = 0; i < 5; i++) {
+        $('.sell', detail).find('li').eq(i).find('b').html((+data[29 - i * 2]).toFixed(2));
+
+        if (data[29 - i * 2] >= data[1]) {
+          $('.sell', detail).find('li').eq(i).find('b').addClass('red').removeClass('green');
+        } else {
+          $('.sell', detail).find('li').eq(i).find('b').addClass('green').removeClass('red');
+        }
+
+        var sellVol = data[28 - i * 2];
+        sellVol = (sellVol / 100).toFixed(0);
+        $('.sell', detail).find('li').eq(i).find('i').html(sellVol);
+      }
+
+      for (var j = 0; j < 5; j++) {
+        $('.buy', detail).find('li').eq(j).find('b').html((+data[11 + j * 2]).toFixed(2));
+
+        if (data[11 + j * 2] >= data[1]) {
+          $('.buy', detail).find('li').eq(j).find('b').addClass('red').removeClass('green');
+        } else {
+          $('.buy', detail).find('li').eq(j).find('b').addClass('green').removeClass('red');
+        }
+
+        var buyVol = data[10 + j * 2];
+        buyVol = (buyVol / 100).toFixed(0);
+        $('.buy', detail).find('li').eq(j).find('i').html(buyVol);
+      }
+
+      // 其他股票信息
+      var info = $('.stock-info');
+      var amplitude = ((data[4] - data[5]) / data[2] * 100).toFixed(2);
+      var amplitudes = amplitude == 'NaN' ? 0 : amplitude;
+
+      $('.open', info).find('.r').html(data[1]);
+      $('.amplitude', info).find('.r').html(amplitudes + '%');
+      $('.high', info).find('.r').html(data[4]);
+      $('.low', info).find('.r').html(data[5]);
+      $('.min', info).find('.r').html((data[2] * 0.9).toFixed(2));
+      $('.max', info).find('.r').html((data[2] * 1.1).toFixed(2));
+      $('.volume', info).find('.r').html((data[8] / 100).toFixed(0) + '手');
+      $('.amount', info).find('.r').html((data[9] / 10000).toFixed(0) + '万');
+    }
+  });
+}
+```
+
+### 页面结构
+
+```html
+<section class="stock-detail">
+  <!-- 主要股票信息 -->
+  <div class="stock-new">
+    <strong class="new">--</strong>
+    <em><b class="top">--</b><br><b class="bottom">--</b></em>
+  </div>
+
+  <!-- 买卖股票信息 -->
+  <ul class="sell">
+    <li><em>卖⑤</em><b>--</b><i>--</i></li>
+    <li><em>卖④</em><b>--</b><i>--</i></li>
+    <li><em>卖③</em><b>--</b><i>--</i></li>
+    <li><em>卖②</em><b>--</b><i>--</i></li>
+    <li><em>卖①</em><b>--</b><i>--</i></li>
+  </ul>
+  <ul class="buy">
+    <li><em>买①</em><b>--</b><i>--</i></li>
+    <li><em>买②</em><b>--</b><i>--</i></li>
+    <li><em>买③</em><b>--</b><i>--</i></li>
+    <li><em>买④</em><b>--</b><i>--</i></li>
+    <li><em>买⑤</em><b>--</b><i>--</i></li>
+  </ul>
+
+  <!-- 其他股票信息 -->
+  <ul class="stock-info">
+    <li class="open"><span class="l">今开</span><span class="r">-</span></li>
+    <li class="amplitude"><span class="l">振幅</span><span class="r">-</span></li>
+    <li class="high"><span class="l">最高</span><span class="r">-</span></li>
+    <li class="low"><span class="l">最低</span><span class="r">-</span></li>
+    <li class="max"><span class="l">涨停价</span><span class="r">-</span></li>
+    <li class="min"><span class="l">跌停价</span><span class="r">-</span></li>
+    <li class="volume"><span class="l">成交量</span><span class="r">-</span></li>
+    <li class="amount"><span class="l">成交额</span><span class="r">-</span></li>
+  </ul>
+</section>
+```

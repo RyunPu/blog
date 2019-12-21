@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "CSS tools"
+date:   2014-03-30
+categories: ['web development']
+tags: ['css']
+---
+
+* 动态样式语言 [Less](http://lesscss.org/)，[Sass](http://sass-lang.com/)，[Stylus](http://stylus-lang.com/)
+
+* CSS3 生成工具 [css3generator](http://css3generator.com/)
+
+* CSS 图片拼合工具 [csssprites](http://csssprites.com/)
+
+* 让 IE 支持部分 CSS3 特性 [css3pie](http://css3pie.com/)
+
+* 让 IE 支持大部分 CSS3 选择器 [selectivizr](http://selectivizr.com/)

@@ -1,0 +1,108 @@
+---
+layout: post
+title:  "使用百度地图 API 进行地理定位"
+date:   2017-02-25
+categories: ['web development']
+tags: ['javascript']
+---
+
+#### 使用百度地图 API 完成地理定位
+
+```js
+$.fn.baiduFindMe = function(options) {
+  var cfgs = $.extend({
+    ak: '',
+    onSuccess: null,
+    onError: function() {}
+  }, options);
+
+  var $el = $(this);
+  var geocodingUrl = 'http://api.map.baidu.com/geocoder/v2/?callback=?&output=json&pois=1&ak=' + cfgs.ak;
+  var geolocation = new BMap.Geolocation();
+
+  geolocation.getCurrentPosition(function(r) {
+    if (r.accuracy === null) {
+      cfgs.onError('用户拒绝地理位置授权');
+      return;
+    }
+
+    if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+      $.getJSON(geocodingUrl, {
+          location: r.point.lat + ',' + r.point.lng
+        }, function(data) {
+          if (data.status === 0) {
+            if (typeof cfgs.onSuccess === 'function') {
+              cfgs.onSuccess(data.result);
+            } else {
+              $el.html(data.result.formatted_address);
+            }
+          }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          cfgs.onError(textStatus);
+        });
+    } else {
+      cfgs.onError(this.getStatus());
+    }
+  });
+
+  return this;
+}
+```
+
+#### 使用 html5 进行初始定位，再用百度地图 API 转换
+
+```js
+$.fn.geoFindMe = function(options) {
+  var cfgs = $.extend({
+    ak: '',
+    onSuccess: null,
+    onError: null
+  }, options);
+
+  var $el = $(this);
+  var changePositionUrl = 'http://api.map.baidu.com/geoconv/v1/?from=1&to=5&ak=' + cfgs.ak;
+  var geocodingUrl = 'http://api.map.baidu.com/geocoder/v2/?callback=?&output=json&pois=1&ak=' + cfgs.ak;
+
+  if (!navigator.geolocation) {
+    showError('你的浏览器不支持地理位置');
+  } else {
+    navigator.geolocation.getCurrentPosition(success, showError);
+  }
+
+  function success(position) {
+    var latitude = position.coords.latitude; // 纬度
+    var longitude = position.coords.longitude; // 经度
+
+    $.getJSON(changePositionUrl, {
+      coords: longitude + ',' + latitude
+    }, function(data) {
+      if (data.status === 0) {
+        $.getJSON(geocodingUrl, {
+          location: data.result[0].y + ',' + data.result[0].x
+        }, function(data) {
+          if (data.status === 0) {
+            if (typeof cfgs.onSuccess === 'function') {
+              cfgs.onSuccess(data.result);
+            } else {
+              $el.html(data.result.formatted_address);
+            }
+          } else {
+            showError(data.status);
+          }
+        });
+      } else {
+        showError(data.status);
+      }
+    });
+  }
+
+  function showError(msg) {
+    if (typeof cfgs.onError === 'function') {
+      cfgs.onError(msg);
+    }
+  }
+
+  return this;
+}
+```

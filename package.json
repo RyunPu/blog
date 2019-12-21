@@ -1,0 +1,13 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "repository": "git@github.com:RyunPu/blog.git",
+  "author": "Ryun Pu <ryunpu@foxmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "algolia": "atomic-algolia"
+  },
+  "devDependencies": {
+    "atomic-algolia": "^0.3.17"
+  }
+}
