@@ -6,7 +6,6 @@ const corsApi = 'https://cors-anywhere.herokuapp.com/'
 let q = 'design'
 
 $(() => {
-  console.log('blog')
   initPalette()
   initCover()
 })
@@ -93,7 +92,7 @@ function initCover(page) {
 
         if (hits.length > 0) {
           const $grid = $('.dream-grid')
-          $grid.masonry({ itemSelector: '.dream-column' })
+          $grid.masonry()
 
           $randomImg.each((index, ele) => {
             const src = hits[index] && hits[index].webformatURL
