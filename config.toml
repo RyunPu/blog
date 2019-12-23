@@ -1,4 +1,4 @@
-baseURL = "http://ryunpu.github.io/"
+baseURL = "https://ryunpu.github.io/"
 languageCode = "zh"
 defaultContentLanguage = "zh"
 title = "Ryun's blog"
@@ -7,9 +7,9 @@ paginate = 10
 
 # copyright = ""
 
-# googleAnalytics = "UA-75787172-1"
+googleAnalytics = "UA-75787172-1"
 
-# disqusShortname = "ryunpu"
+disqusShortname = "ryunpu"
 
 # enableRobotsTXT = true
 

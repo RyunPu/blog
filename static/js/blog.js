@@ -25,11 +25,12 @@ function initPalette() {
       url: `${corsApi}http://www.colourlovers.com/api/palettes/top`,
       data: {
         format: 'json',
-        numResults: 5
+        numResults: 6
       },
       success(res) {
         if (Array.isArray(res)) {
           const colors = res.reduce((p, c) => p.concat([...c.colors]), [])
+          colors.length = $('.dream-tags a').length
           addBGC(colors)
           localStorage.setItem('colors', colors)
 
@@ -48,7 +49,12 @@ function initPalette() {
 
 function addBGC(colors) {
   const $palette = $('.dream-palette')
-  if ($palette.length === 0 || colors[0].length !== 6 || colors.length < $palette.length) return
+  if ($palette.length === 0) return
+  if (colors[0].length !== 6 || (colors.length !== $('.dream-tags a').length && colors.length <= 30)) {
+    localStorage.clear()
+    initPalette()
+    return
+  }
 
   $palette.find('.card').each((index, ele) => {
     const color = `#${colors[index]}`

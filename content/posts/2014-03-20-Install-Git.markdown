@@ -29,3 +29,9 @@ $ brew install git
 ```bash
 $ brew upgrade git
 ```
+
+如果需要改变 Git 的指向:
+
+```bash
+$ brew link git --overwrite
+```

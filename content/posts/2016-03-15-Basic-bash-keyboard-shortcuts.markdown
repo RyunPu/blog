@@ -28,6 +28,8 @@ tags: ['mac']
 
 ```Ctrl + u```  Cut/delete the Line before the cursor position
 
+```Ctrl + q```  Cut/delete the whole Line
+
 ```Ctrl + k```  Cut the Line after the cursor to the clipboard
 
 ```Ctrl + w```  Cut the Word before the cursor to the clipboard
@@ -38,7 +40,23 @@ tags: ['mac']
 
 ```Ctrl + h```  Delete character before the cursor (backspace)
 
+```Ctrl + _```  Undo
+
+### Command
+
+```Ctrl + l```	Clear screen
+
+```Cmd + shift + h``` Show paste history
+
 ### History
+
+```abc``` then `Cmd + ;` list all commands beginning with abc
+
+```!!```	Execute last command in history
+
+```!abc```	Execute last command in history beginning with abc
+
+```!abc:p```	Print last command in history beginning with abc
 
 ```Ctrl + r```  Recall the last command including the specified character(s)
 
