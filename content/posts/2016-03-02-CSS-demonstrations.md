@@ -6,6 +6,80 @@ categories: ['web development']
 tags: ['css']
 ---
 
+<div class="css-demo-carousel-container">
+  <div class="css-demo-carousel">
+    <div>1</div>
+  	<div>2</div>
+  	<div>3</div>
+  	<div>4</div>
+    <div>5</div>
+  	<div>6</div>
+  </div>
+</div>
+
+```html
+<div class="css-demo-carousel-container">
+  <div class="css-demo-carousel">
+    <div>1</div>
+  	<div>2</div>
+  	<div>3</div>
+  	<div>4</div>
+    <div>5</div>
+  	<div>6</div>
+  </div>
+</div>
+```
+
+```css
+.css-demo-carousel-container { perspective: 1000px; transform: translateX(100px);}
+.css-demo-carousel { position: relative; transform-style: preserve-3d; width: 100px; height: 60px; animation: play 10s infinite linear;}
+.css-demo-carousel div { position: absolute; width: 100%; height: 100%; text-align: center; line-height: 60px; color: white;}
+.css-demo-carousel div:nth-child(1) { background: rgba(255,0,0,.5); transform: rotateY(0deg) translateZ(110px);}
+.css-demo-carousel div:nth-child(2) { background: rgba(128,128,0,.5); transform: rotateY(60deg) translateZ(110px);}
+.css-demo-carousel div:nth-child(3) { background: rgba(255,165,0,.5); transform: rotateY(120deg) translateZ(110px);}
+.css-demo-carousel div:nth-child(4) { background: rgba(255,255,0,.5); transform: rotateY(180deg) translateZ(110px);}
+.css-demo-carousel div:nth-child(5) { background: rgba(255,128,0,.5); transform: rotateY(240deg) translateZ(110px);}
+.css-demo-carousel div:nth-child(6) { background: rgba(128,255,0,.5); transform: rotateY(300deg) translateZ(110px);}
+@keyframes play {
+  from { transform: rotateY(360deg);}
+  to { transform: rotateY(0);}
+}
+```
+
+<div class="css-demo-cube-container">
+  <div class="css-demo-cube">
+    <div>1</div>
+  	<div>2</div>
+  	<div>3</div>
+  	<div>4</div>
+  </div>
+</div>
+
+```html
+<div class="css-demo-cube-container">
+  <div class="css-demo-cube">
+    <div>1</div>
+  	<div>2</div>
+  	<div>3</div>
+  	<div>4</div>
+  </div>
+</div>
+```
+
+```css
+.css-demo-cube-container { perspective: 1000px; transform: translateX(15px);}
+.css-demo-cube { position: relative; transform-style: preserve-3d; width: 60px; height: 60px; animation: play 4s infinite linear;}
+.css-demo-cube div { position: absolute; width: 100%; height: 100%; text-align: center; line-height: 60px; color: white; backface-visibility: hidden;}
+.css-demo-cube div:nth-child(1) { background: rgba(255,0,0,1); transform: rotateY(0deg) translateZ(30px);}
+.css-demo-cube div:nth-child(2) { background: rgba(128,128,0,1); transform: rotateY(90deg) translateZ(30px); }
+.css-demo-cube div:nth-child(3) { background: rgba(255,165,0,1); transform: rotateY(180deg) translateZ(30px);}
+.css-demo-cube div:nth-child(4) { background: rgba(255,255,0,1); transform: rotateY(-90deg) translateZ(30px);}
+@keyframes play {
+  from { transform: rotateY(360deg);}
+  to { transform: rotateY(0);}
+}
+```
+
 <div class="css-demo-loading"></div>
 
 ```html
