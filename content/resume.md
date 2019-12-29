@@ -1,12 +1,95 @@
 ---
-title: "个人简历"
-date: 2017-07-29T19:57:50+08:00
+title: "【求职】【成都】6 年前端开发经验"
+date: 2019-12-27
 type: static
 layout: resume
 ---
 
-<div class="resume">
+<div style="background:url(https://cdn.learnku.com/uploads/images/201912/27/6/1PWIkjibzZ.png!large) right -60px no-repeat;background-size:160px">
 
-  ![image](/img/resume.jpg)
+你好，❤ 朋友
+
+这里是 Ryun 的个人简历 📝
+
+作为一名前端攻城狮 🦁
+
+希望能和大家一起学习 🔎
+
+共同进步 🏃
+
+我对提升效率和美感的事物有兴趣 😋
+
+欢迎 👏交流
+
+现在我准备找一份工作大干一场 💪
 
 </div>
+
+### <img src="https://cdn.learnku.com/uploads/images/201912/27/6/uvUrhDkRz9.png!large" width=19 style="position:relative;top:-2px;vertical-align: middle;margin-right: 3px;border: none;box-shadow: none;"> 基本信息
+
+|蒲元敏|#|#|#|
+|--- |--- |--- |--- |
+|性别|男|民族|汉|
+|学历|本科|年龄|31|
+|住址|四川广元|邮箱|ryunpu@foxmail.com|
+
+### <img src="https://cdn.learnku.com/uploads/images/201912/27/6/JVYsxidV9A.png!large" width=19 style="position:relative;top:-2px;vertical-align: middle;margin-right: 3px;border: none;box-shadow: none;"> 教育培训
+
+赣南师范⼤学市场营销专业 | 2005.9 - 2009.7
+
+康盛产品⼯程师培训 | 2010.11 - 2011.3
+
+### <img src="https://cdn.learnku.com/uploads/images/201912/27/6/WzGvr1pkx4.png!large" width=19 style="position:relative;top:-2px;vertical-align: middle;margin-right: 3px;border: none;box-shadow: none;"> 工作经历
+
+PHPChina UE ⼯ 程 师 | 2011.5 - 2012.11
+
+CondeNast China 前端⼯程师 | 2013.1 - 2015.2
+
+北京聪明糖 ⾼级前端⼯程师 | 2015.3 - 2016.1
+
+北京优帆远扬 前端主管 | 2016.2 - 2018.1
+
+⾃由职业⼈ | 2018.2 – ⾄今
+
+### <img src="https://cdn.learnku.com/uploads/images/201912/27/6/heNkYxYQlb.png!large" width=19 style="position:relative;top:-2px;vertical-align: middle;margin-right: 3px;border: none;box-shadow: none;"> 专业技能
+
+<div style="background:url(https://cdn.learnku.com/uploads/images/201912/27/6/S7liGNybWo.png!large) 61.8% center no-repeat;background-size:165px">
+
+CSS3
+
+HTML5
+
+JavaScript
+
+Vue.js
+
+微信⼩程序
+
+熟练使⽤各种开发和设计⼯具
+
+熟练配合 Node.js、PHP 和 Laravel
+</div>
+
+### <img src="https://cdn.learnku.com/uploads/images/201912/27/6/ZTAsNW3ECj.png!large" width=19 style="position:relative;top:-2px;vertical-align: middle;margin-right: 3px;border: none;box-shadow: none;"> 项目经验
+
+
+* [悦⼰互动](http://www.self.com.cn/) -> 基于 Discuz 模板系统的结构重写
+* [GQ 男⼠](http://www.gq.com.cn/) -> 全新⻔户及相关⻚⾯的制作
+* [MXDIA](https://www.mxdia.com/) -> 负责登录注册等流程及⻚⾯展示
+* [喜茶 HEYTEA](https://www.heytea.com/) -> 所有⼩程序的前端流程及⻚⾯展示
+* [花缘优美](http://www.huayuanguoji.cn/) -> 所有⼩程序的前端流程及⻚⾯展示
+* [Gingercat](http://www.lehuomao.com/index.html) -> 负责移动端的所有流程及⻚⾯展示
+
+...
+
+
+
+### <img src="https://cdn.learnku.com/uploads/images/201912/27/6/4cHgc1xOdQ.png!large" width=19 style="position:relative;top:-2px;vertical-align: middle;margin-right: 3px;border: none;box-shadow: none;"> 开发总结
+
+* 学习能⼒很重要，持之以恒的学习更重要
+* 节约别⼈的时间就是节约⾃⼰的时间
+* 分享和探讨才能取得更多进步
+
+> 我的个人博客 https://ryunpu.github.io/
+
+<img src="https://cdn.learnku.com/uploads/images/201912/27/6/aGougJrpvw.png!large" width=84 style="display:block;margin-top:3rem;border: none;box-shadow: none;">
