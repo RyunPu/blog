@@ -6,6 +6,54 @@ categories: ['web development']
 tags: ['javascript']
 ---
 
+### A simple event emitter
+
+```js
+export default {
+  events: {},
+
+  on(event, callback) {
+    if (!this.events[event]) {
+      this.events[event] = []
+    }
+
+    if (typeof callback === 'function') {
+      this.events[event].push(callback)
+    }
+  },
+
+  once(event, callback) {
+    if (typeof callback === 'function') {
+      const once = (...args) => {
+        callback(...args)
+        this.off(event, once)
+      }
+      this.on(event, once)
+    }
+  },
+
+  emit(event, ...args) {
+    if (this.events[event]) {
+      this.events[event].forEach(callback => {
+        callback(...args)
+      })
+    }
+  },
+
+  off(event, callback) {
+    const callbacks = this.events[event]
+
+    if (callbacks) {
+      if (typeof callback === 'function') {
+        this.events[event] = callbacks.filter(cb => cb.toString() !== callback.toString())
+      } else {
+        this.events[event] = null
+      }
+    }
+  },
+}
+```
+
 ### Use UMD to create a jQuery plugin
 
 ```js
@@ -41,6 +89,130 @@ tags: ['javascript']
 }));
 ```
 
+### Lazy load images
+
+```js
+function lazyLoad(offset = 0, selector = 'img[data-src]') {
+  const load = () => {
+    const imgs = [...document.querySelectorAll(selector + ':not(.loaded)')]
+
+    imgs.forEach(img => {
+      if (window.innerHeight - img.getBoundingClientRect().top + offset > 0) {
+        img.src = img.dataset.src
+        img.onload = () => img.classList.add('loaded')
+      }
+    })
+  }
+
+  load()
+  window.addEventListener('scroll', load, false)
+  window.addEventListener('resize', load, false)
+}
+```
+
+### Lazy load images with IntersectionObserver
+
+```js
+function lazyLoad(offset = 0, selector = 'img[data-src]', root = null) {
+  const interactSettings = {
+    root: document.querySelector(root),
+    rootMargin: `0px 0px ${offset}px 0px`
+  }
+
+  const onIntersection = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target
+        observer.unobserve(img)
+        img.src = img.dataset.src
+        img.onload = () => img.classList.add('loaded')
+      }
+    })
+  }
+
+  const observer = new IntersectionObserver(onIntersection, interactSettings)
+  const imgs = [...document.querySelectorAll(selector + ':not(.loaded)')]
+  imgs.forEach(img => observer.observe(img))
+}
+```
+
+### Throttle
+
+```js
+const throttle = (fn, wait = 17) => {
+  let lastTime = 0
+  return function(...args) {
+    let now = Date.now()
+
+    if (now - lastTime >= wait) {
+      lastTime = now
+      fn.apply(this, args)
+    }
+  }
+}
+```
+
+### Debounce
+
+```js
+const debounce = (fn, wait = 17) => {
+  let timer = null
+  return function(...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, wait)
+  }
+}
+```
+
+### Throttle and Debounce
+
+```js
+const throttleDebounce = (fn, wait = 17) => {
+  let lastTime = 0
+  let timer = null
+
+  return function(...args) {
+    let now = Date.now()
+
+    if (now - lastTime < wait) {
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => {
+        lastTime = now
+        fn.apply(this, args)
+      }, wait)
+    } else {
+      lastTime = now
+      fn.apply(this, args)
+    }
+  }
+}
+```
+
+### Lodash cloneDeep
+
+```js
+function cloneDeep(obj) {
+  function isObject(o) {
+    return (typeof o === 'object' || typeof o === 'function') && o !== null
+  }
+
+  if (!isObject(obj)) {
+    return obj
+  }
+
+  let isArray = Array.isArray(obj)
+  let newObj = isArray ? [...obj] : { ...obj }
+
+  Reflect.ownKeys(newObj).forEach(key => {
+    newObj[key] = isObject(obj[key]) ? cloneDeep(obj[key]) : obj[key]
+  })
+
+  return newObj
+}
+```
+
 ### Format a Date
 
 ```js
@@ -73,6 +245,28 @@ Date.prototype.format = function(format) {
 
 ```js
 new Date().format('yyyy-MM-dd hh:mm:ss'); // 2014-04-02 08:00:00
+```
+
+### Set fetch body from an object
+
+```js
+function setFetchBody(obj) {
+  let str = ''
+  if (!obj) return str
+
+  let isFirstKey = true
+
+  for (const key of Object.keys(obj)) {
+    if (isFirstKey) {
+      isFirstKey = false
+      str += `${key}=${obj[key]}`
+    } else {
+      str += `&${key}=${obj[key]}`
+    }
+  }
+
+  return str
+}
 ```
 
 ### Get items filter by including any one of other items

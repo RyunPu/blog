@@ -1,14 +1,14 @@
 ---
 layout: post
 title:  "Comparison of NPM and yarn commands"
-date:   2015-03-19
+date:   2015-03-20
 categories: ['web development']
 tags: ['tool']
 ---
 
 | npm \(v5\)                                 | Yarn                                     |
 |--------------------------------------------|------------------------------------------|
-| npm install                                | yarn add                                 |
+| npm install                                | yarn/yarn install                        |
 | \(N/A\)                                    | yarn add \-\-flat                        |
 | \(N/A\)                                    | yarn add \-\-har                         |
 | npm install \-\-no\-package\-lock          | yarn add \-\-no\-lockfile                |
